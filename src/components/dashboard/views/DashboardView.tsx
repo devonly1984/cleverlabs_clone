@@ -1,8 +1,8 @@
 import PageHeader from "@/components/shared/PageHeader";
 import HeroPattern from "../shared/HeroPattern"
 import DashboardHeader from "@/components/shared/DashboardHeader";
-import TextInputPanel from "../inputs/TextInputPanel";
-import QuickActionsPanel from "../inputs/QuickActionsPanel";
+import TextInputPanel from "../panels/TextInputPanel";
+import QuickActionsPanel from "../panels/QuickActionsPanel";
 
 const DashboardView = () => {
   return (

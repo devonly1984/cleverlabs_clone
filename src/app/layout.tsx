@@ -8,7 +8,10 @@ import {ClerkProvider} from '@clerk/nextjs'
 
 
 export const metadata: Metadata = {
-  title: "Eleven Labs Clone",
+  title: {
+    default: "Eleven Labs Clone",
+    template: "%s | Eleven Labs Clone",
+  },
   description: "Eleven Labs Tut by CWA",
 };
 
