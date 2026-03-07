@@ -1,21 +1,28 @@
+"use client";
 import { useAppForm } from "@/hooks/useAppForm";
-import { defaultTTSValues, ttsFormOptions, ttsFormSchema, TTSFormValues } from "@/lib/TTSFormSchema";
-import { ReactNode } from "react"
+import {
+  defaultTTSValues,
+  ttsFormOptions,
+  ttsFormSchema,
+  TTSFormValues,
+} from "@/lib/TTSFormSchema";
+import { ReactNode } from "react";
 
 interface TTSFormProps {
-    children: ReactNode;
-    defaultValues?:TTSFormValues
+  children: ReactNode;
+  defaultValues?: TTSFormValues;
 }
 const TTSForm = ({ children, defaultValues }: TTSFormProps) => {
-    const ttsForm = useAppForm({
-      ...ttsFormOptions,
-      defaultValues: defaultValues ?? defaultTTSValues,
-      validators: {
-        onSubmit: ttsFormSchema
-      },
-      onSubmit:async()=>{
-      }
-    });
+  const ttsForm = useAppForm({
+    ...ttsFormOptions,
+    defaultValues: defaultValues ?? defaultTTSValues,
+    validators: {
+      onSubmit: ttsFormSchema,
+    },
+    onSubmit: async (values) => {
+      console.log(values);
+    },
+  });
   return <ttsForm.AppForm>{children}</ttsForm.AppForm>;
 };
-export default TTSForm
+export default TTSForm;
