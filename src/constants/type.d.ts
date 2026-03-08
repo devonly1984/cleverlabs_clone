@@ -17,3 +17,8 @@ export interface QuickAction {
     gradient:string;
     href: string;
 }
+export type UploadAudioOptions= {
+    buffer: Buffer;
+    key:string;
+    contentType?: string;
+}

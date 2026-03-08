@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { inter } from "@/constants/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import {ClerkProvider} from '@clerk/nextjs'
-
+import { TRPCReactProvider } from "@/lib/trpc/client";
 
 export const metadata: Metadata = {
   title: {
@@ -22,12 +22,16 @@ const RootLayout = ({
 }>) => {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body className={` ${inter.variable}antialiased`}>
-        {children}
-        <Toaster />
-      </body>
-    </html>
+      
+        <html lang="en">
+          <body className={` ${inter.variable}antialiased`}>
+            <TRPCReactProvider>
+            {children}
+            <Toaster />
+            </TRPCReactProvider>
+          </body>
+        </html>
+      
     </ClerkProvider>
   );
 };
