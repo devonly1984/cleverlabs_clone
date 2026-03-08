@@ -1,15 +1,38 @@
-import { initTRPC } from '@trpc/server';
-import { cache } from 'react';
-export const createTRPCContext = cache(async () => {
-
-  return { userId: 'user_123' };
-});
+import { auth } from '@clerk/nextjs/server';
+import { initTRPC, TRPCError } from '@trpc/server';
+import superjson from 'superjson'
+export const createTRPCContext = {}
 
 const t = initTRPC.create({
 
-  // transformer: superjson,
+   transformer: superjson,
 });
 
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
+export const authProcedure  =t.procedure.use(async({next})=>{
+    const {userId} = await auth();
+    if (!userId) {
+      throw new TRPCError({code: "UNAUTHORIZED"})
+    }
+
+  return next({
+    ctx: {userId}
+  });
+})
+export const organizationProcedure = t.procedure.use(async ({ next }) => {
+const {userId,orgId}  = await auth();
+ if (!userId) {
+      throw new TRPCError({code: "UNAUTHORIZED"})
+    }
+    if (!orgId) {
+      throw new TRPCError({
+        code: "FORBIDDEN",
+        message: "Organization Required"
+      })
+    }
+return next({
+  ctx: { userId, orgId }
+})
+})

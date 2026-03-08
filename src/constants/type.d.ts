@@ -1,3 +1,5 @@
+import { AppRouter } from "@/lib/trpc/routers/_app";
+import { inferRouterOutputs } from "@trpc/server";
 import { LucideIcon } from "lucide-react";
 
 interface MenuItem {
@@ -22,3 +24,4 @@ export type UploadAudioOptions= {
     key:string;
     contentType?: string;
 }
+export type TTSVoiceItem = inferRouterOutputs<AppRouter>['voices']['getAll']['custom'][number]

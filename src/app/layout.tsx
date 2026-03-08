@@ -22,16 +22,14 @@ const RootLayout = ({
 }>) => {
   return (
     <ClerkProvider>
-      
-        <html lang="en">
-          <body className={` ${inter.variable}antialiased`}>
-            <TRPCReactProvider>
+      <html lang="en">
+        <body className={` ${inter.variable}antialiased`}>
+          <TRPCReactProvider>
             {children}
             <Toaster />
-            </TRPCReactProvider>
-          </body>
-        </html>
-      
+          </TRPCReactProvider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 };

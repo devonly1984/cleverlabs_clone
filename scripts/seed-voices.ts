@@ -16,7 +16,7 @@ import {
   type VoiceCategory,
 } from "../src/generated/prisma/client";
 
-import { CANONICAL_SYSTEM_VOICE_NAMES } from "@/constants/voice-scoping";
+import { CANONICAL_SYSTEM_VOICE_NAMES } from "@/constants/voices/voice-scoping";
 
 const SYSTEM_VOICES_DIR = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
