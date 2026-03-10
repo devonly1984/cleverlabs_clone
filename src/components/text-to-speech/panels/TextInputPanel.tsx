@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 
 import { Textarea} from "@/components/ui/textarea";
 import { COST_PER_UNIT, TEXT_MAX_LENGTH } from "@/constants"
-import { ttsFormOptions } from "@/lib/TTSFormSchema";
+import { ttsFormOptions } from "@/lib/schemas/TTSFormSchema";
 import { useTypedAppFormContext } from "@/hooks/useAppForm";
 import GenerateButton from "../buttons/GenerateButton";
 const TextInputPanel = () => {
@@ -29,16 +29,19 @@ const isValid = useStore(Textform.store, (s) => s.isValid);
           )}
         </Textform.Field>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t from-background to-transparent" />
-        {/**Action bar */}
-        <div className="shrink-0 p-4 lg:p-6">
-          <div className="flex flex-col gap-3 lg:hidden">
-            <div className="flex items-center gap-2"></div>
+      </div>
+      {/**Action bar */}
+      <div className="shrink-0 p-4 lg:p-6">
+        {/**Mobile Layout */}
+        <div className="flex flex-col gap-3 lg:hidden">
+          <div className="flex items-center gap-2">   </div>
             <GenerateButton
               className="w-full"
               disabled={isSubmitting}
               isSubmitting={isSubmitting}
               onSubmit={() => Textform.handleSubmit()}
             />
+       
           </div>
           {text.length > 0 ? (
             <div className="lg:flex items-center justify-between hidden">
@@ -76,7 +79,7 @@ const isValid = useStore(Textform.store, (s) => s.isValid);
           )}
         </div>
       </div>
-    </div>
+
   );
 }
 export default TextInputPanel

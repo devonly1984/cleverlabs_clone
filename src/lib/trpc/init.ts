@@ -1,7 +1,10 @@
 import { auth } from '@clerk/nextjs/server';
 import { initTRPC, TRPCError } from '@trpc/server';
+import { cache } from 'react';
 import superjson from 'superjson'
-export const createTRPCContext = {}
+export const createTRPCContext = cache(async ()=>{
+  return {}
+});
 
 const t = initTRPC.create({
 
@@ -11,7 +14,7 @@ const t = initTRPC.create({
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
-export const authProcedure  =t.procedure.use(async({next})=>{
+export const authProcedure  =baseProcedure.use(async({next})=>{
     const {userId} = await auth();
     if (!userId) {
       throw new TRPCError({code: "UNAUTHORIZED"})
@@ -21,7 +24,7 @@ export const authProcedure  =t.procedure.use(async({next})=>{
     ctx: {userId}
   });
 })
-export const organizationProcedure = t.procedure.use(async ({ next }) => {
+export const organizationProcedure =baseProcedure.use(async ({ next }) => {
 const {userId,orgId}  = await auth();
  if (!userId) {
       throw new TRPCError({code: "UNAUTHORIZED"})

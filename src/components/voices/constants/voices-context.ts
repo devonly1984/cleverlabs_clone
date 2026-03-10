@@ -1,4 +1,4 @@
-import { TTSVoiceItem } from "../type";
+import { TTSVoiceItem } from "../../../constants/type";
 
 export interface TTSVoicesContextValue {
     customVoices: TTSVoiceItem[];

@@ -5,7 +5,8 @@ import { Slider } from "@/components/ui/slider";
 
 import { useTypedAppFormContext } from "@/hooks/useAppForm";
 import { sliders } from "@/constants/sliders";
-import { ttsFormOptions } from "@/lib/TTSFormSchema";
+import { ttsFormOptions } from "@/lib/schemas/TTSFormSchema";
+import VoiceSelector from "@/components/voices/VoiceSelector";
 
 const SettingsTab = () => {
   const settingsForm = useTypedAppFormContext(ttsFormOptions);
@@ -14,9 +15,7 @@ const SettingsTab = () => {
     <>
       {/**Voice Style Dropdown */}
       <div className="border b border-dashed p-4">
-        <p className="text-sm text-muted-foreground">
-          Voice Selector coming soon
-        </p>
+        <VoiceSelector />
       </div>
       {/**Voice Adjustments */}
       <div className="flex-1 p-4">

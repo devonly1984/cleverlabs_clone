@@ -1,8 +1,6 @@
 import {z} from 'zod';
 import { formOptions } from '@tanstack/react-form';
 
-
-
 export const ttsFormSchema = z.object({
     text: z.string().min(1, "Please enter some text"),
     voiceId: z.string().min(1,"Please select a voice"),
@@ -11,8 +9,8 @@ export const ttsFormSchema = z.object({
     topK:z.number(),
     repetitionPenalty: z.number()
 })
-export type TTSFormValues = z.infer<typeof ttsFormSchema>
 
+export type TTSFormValues = z.infer<typeof ttsFormSchema>
 export const defaultTTSValues: TTSFormValues={
     text:'',
     voiceId:"",

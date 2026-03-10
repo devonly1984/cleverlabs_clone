@@ -5,7 +5,7 @@ import {
   ttsFormOptions,
   ttsFormSchema,
   TTSFormValues,
-} from "@/lib/TTSFormSchema";
+} from "@/lib/schemas/TTSFormSchema";
 import { ReactNode } from "react";
 
 interface TTSFormProps {

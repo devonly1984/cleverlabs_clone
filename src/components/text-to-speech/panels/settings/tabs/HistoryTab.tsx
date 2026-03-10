@@ -1,5 +1,6 @@
 "use client"
 import { AudioLines, AudioWaveform, Clock } from "lucide-react";
+
 const HistoryTab = () => {
   return (
     <div className="flex h-full flex-col items-center justify-center gap-2 p-8">

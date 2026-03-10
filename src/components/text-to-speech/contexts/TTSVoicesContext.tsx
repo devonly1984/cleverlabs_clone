@@ -1,5 +1,5 @@
 "use client";
-import { TTSVoicesContextValue } from '@/constants/voices/voices-context';
+import { TTSVoicesContextValue } from '@/components/voices/constants/voices-context';
 import {createContext,ReactNode,useContext} from 'react';
 
 const TTSVoicesContext = createContext<TTSVoicesContextValue | null>(null);

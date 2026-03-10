@@ -64,6 +64,7 @@ export const voicesRouter = createTRPCRouter({
           },
         }),
       ]);
+      
       return {custom,system}
     }),
     delete: organizationProcedure.input(z.object({ id: z.string() })).mutation(async({ ctx, input })=>{
