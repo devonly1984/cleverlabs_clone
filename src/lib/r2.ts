@@ -2,7 +2,7 @@ import {S3Client,PutObjectCommand,GetObjectCommand,DeleteObjectCommand} from '@a
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import {env} from './env';
 
-import { UploadAudioOptions } from '@/constants/type';
+import { UploadAudioOptions } from '@/lib/types/type';
 
 const r2 = new S3Client({
     region: 'auto',

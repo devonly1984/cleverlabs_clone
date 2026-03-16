@@ -13,7 +13,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { useClerk } from "@clerk/nextjs";
-import { MenuItem } from "@/constants/type";
+import { MenuItem } from "@/lib/types/type";
 import NavSection from "./Sections/NavSection";
 import { mainMenuItems } from "@/constants";
 import DashboardFooter from "./Sections/FooterSection";

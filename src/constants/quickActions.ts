@@ -1,4 +1,4 @@
-import { QuickAction } from "./type";
+import { QuickAction } from "../lib/types/type";
 
 export const quickActions: QuickAction[] = [
   {

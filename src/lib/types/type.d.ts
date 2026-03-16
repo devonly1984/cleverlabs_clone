@@ -35,3 +35,11 @@ export interface Slider {
   step:number;
   defaultValue:number;
 }
+export type VoicePreviewPanelVoice = {
+  id?: string;
+  name: string;
+}
+export type VoicePreviewMobileVoice = {
+  id?: string;
+  name: string;
+}

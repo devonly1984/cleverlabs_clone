@@ -5,8 +5,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
-import SettingsTab from "./tabs/SettingsTab";
-import HistoryTab from "./tabs/HistoryTab";
+import SettingsTab from "./tabs/desktop/SettingsTab";
+import HistoryTab from "./tabs/desktop/HistoryTab";
 import { tabTriggerClassName } from "@/constants";
 
 const SettingsPanel = () => {

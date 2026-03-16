@@ -1,5 +1,5 @@
 import { AudioLines, Home, LayoutGrid,  Volume2 } from "lucide-react";
-import { MenuItem } from "./type";
+import { MenuItem } from "../lib/types/type";
 
 export const mainMenuItems:MenuItem[]=[
     {

@@ -1,4 +1,4 @@
-import { Slider } from "./type";
+import { Slider } from "../lib/types/type";
 
 export const sliders: Slider[]=[
     {

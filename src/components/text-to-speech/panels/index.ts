@@ -1,3 +1,5 @@
 export {default as TextInputPanel} from './TextInputPanel'
 export {default as SettingsPanel} from './settings/SettingsPanel'
 export { default as VoicePreviewPlaceholder } from './VoicePreviewPlaceholder'
+export {default as VoicePreviewPanel} from './VoicePreviewPanel'
+export { default as VoicePreviewMobile } from './VoicePreviewMobile'

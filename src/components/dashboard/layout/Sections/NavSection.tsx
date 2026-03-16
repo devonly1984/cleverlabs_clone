@@ -1,6 +1,6 @@
 
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-import { NavSectionProps } from "@/constants/type"
+import { NavSectionProps } from "@/lib/types/type"
 import Link from "next/link";
 
 
