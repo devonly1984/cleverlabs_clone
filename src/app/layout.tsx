@@ -6,7 +6,7 @@ import { inter } from "@/constants/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import {ClerkProvider} from '@clerk/nextjs'
 import { TRPCReactProvider } from "@/lib/trpc/client";
-
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 export const metadata: Metadata = {
   title: {
     default: "Eleven Labs Clone",
@@ -22,10 +22,10 @@ const RootLayout = ({
 }>) => {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={` ${inter.variable}antialiased`}>
           <TRPCReactProvider>
-            {children}
+            <NuqsAdapter>{children}</NuqsAdapter>
             <Toaster />
           </TRPCReactProvider>
         </body>

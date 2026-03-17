@@ -43,3 +43,5 @@ export type VoicePreviewMobileVoice = {
   id?: string;
   name: string;
 }
+export type VoiceItem = 
+  inferRouterOutputs<AppRouter>['voices']['getAll']['custom'][number];
