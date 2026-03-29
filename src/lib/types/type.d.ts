@@ -45,3 +45,9 @@ export type VoicePreviewMobileVoice = {
 }
 export type VoiceItem = 
   inferRouterOutputs<AppRouter>['voices']['getAll']['custom'][number];
+
+  export interface VoiceCreateProps {
+      children?:ReactNode;
+    open?:boolean;
+    onOpenChange?:(open:boolean)=>void;
+  }

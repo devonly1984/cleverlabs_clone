@@ -13,7 +13,7 @@ interface VoicesPageProps {
 const VoicesPage = async ({ searchParams }: VoicesPageProps) => {
     const {query} = await voicesSearchParamsCache.parse(searchParams)
 
-    prefetch(trpc.voices.getAll.queryOptions());
+    prefetch(trpc.voices.getAll.queryOptions({query}));
 
   return (
     <HydrateClient>

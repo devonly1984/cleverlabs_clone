@@ -8,7 +8,7 @@ import { useQueryState } from "nuqs";
 const VoicesContent = () => {
     const trpc = useTRPC();
     const [query] = useQueryState("query", voicesSearchParams.query);
-    const { data } = useSuspenseQuery(trpc.voices.getAll.queryOptions({}));
+    const { data } = useSuspenseQuery(trpc.voices.getAll.queryOptions({query}));
   return (
   <>
   <VoicesList title="Team Voices" voices={data.custom}/>

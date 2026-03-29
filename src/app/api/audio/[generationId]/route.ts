@@ -13,18 +13,18 @@ export async function GET(_request: Request, { params }: { params: Promise<{ gen
         where: { id: generationId, orgId }
     })
     if (!generation) {
-        return new Response("Generation not found",{status:404})
+        return Response.json({ error: "Generation not found" }, { status: 404 })
     }
     if (!generation.r2ObjectKey) {
-        return new Response("Audio not available yet", { status: 409 })
+        return  Response.json({error: "Audio not available yet"}, { status: 409 })
     }
     const signedUrl = await getSignedAudioUrl(generation.r2ObjectKey);
     const audioResponse = await fetch(signedUrl)
 
     if (!audioResponse.ok) {
-        return new Response("Failed to fetch audio", { status: 502 })
+        return new Response("Failed to fetch audio" , { status: 502 })
     }
-    return new Response(audioResponse.body,{
+    return new Response(audioResponse.body, {
         headers: {
             "Content-Type": "audio/wav",
             "Cache-Control": "private,max-age=3600",

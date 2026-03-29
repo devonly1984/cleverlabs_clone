@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Mic, MoreHorizontal, Pause, Play } from "lucide-react";
+import { Mic, MoreHorizontal, Pause, Play, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,20 +7,50 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Spinner } from "@/components/ui/spinner";
 import VoiceAvatar from "../voice-avatar/VoiceAvatar";
 
 import { VOICE_CATEGORY_LABELS } from "../constants/voice-categories";
 import { VoiceItem } from "@/lib/types/type";
 import { parseLanguage } from "@/lib/utils";
+import { useAudioPlayback } from "@/hooks/useAudioPlayback";
+import {toast} from 'sonner';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTRPC } from "@/lib/trpc/client";
+import { useState } from "react";
 interface VoiceCardProps {
   voice: VoiceItem;
 }
 const VoiceCard = ({ voice }: VoiceCardProps) => {
+  const trpc = useTRPC();
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const { flag, region } = parseLanguage(voice.language);
     const audioSrc = `/api/voices/${encodeURIComponent(voice.id)}`;
-    const isLoading=false;
-    const isPlaying = false;
+  const { isLoading, isPlaying, togglePlay } = useAudioPlayback(audioSrc);
+  const removeMutation = useMutation(
+    trpc.voices.delete.mutationOptions({
+      onSuccess: () => {
+        toast.success("Voice Deleted Successfully");
+        queryClient.invalidateQueries({
+          queryKey: trpc.voices.getAll.queryKey(),
+        });
+      },
+      onError: (error) => {
+        toast.error(error.message ?? "Failed to delete voice");
+      },
+    }),
+  );
+  const queryClient = useQueryClient()
   return (
     <div className="flex items-center gap-1 overflow-hidden rounded-xl border pr-3 lg:pr-6">
       <div className="relative h-24 w-20 shrink-0 lg:h-30 lg:w-24">
@@ -55,7 +85,7 @@ const VoiceCard = ({ voice }: VoiceCardProps) => {
           size="icon-sm"
           className="rounded-full"
           disabled={isLoading}
-          onClick={() => {}}
+          onClick={togglePlay}
         >
           {isLoading ? (
             <Spinner className="size-4" />
@@ -82,8 +112,51 @@ const VoiceCard = ({ voice }: VoiceCardProps) => {
                 <span className="font-medium">Use this voice</span>
               </Link>
             </DropdownMenuItem>
+            {voice.variant==='CUSTOM' && (
+            <DropdownMenuItem
+              onClick={() => setShowDeleteDialog(true)}
+              className="text-destructive"
+            >
+              <Trash2 className="size-4 text-destructive" />
+              <span className="font-medium">Delete Voice</span>
+            </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
+        {voice.variant === "CUSTOM" && (
+          <AlertDialog
+            open={showDeleteDialog}
+            onOpenChange={setShowDeleteDialog}
+          >
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Delete voice</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to delete &quot;{voice.name}&quot;?
+                  This cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel disabled={removeMutation.isPending}>
+                  Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  variant={"destructive"}
+                  disabled={removeMutation.isPending}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeMutation.mutate(
+                      { id: voice.id },
+                      { onSuccess: () => setShowDeleteDialog(false) },
+                    );
+                  }}
+                >
+                  {removeMutation.isPending ? "Deleting..." : "Delete"}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
       </div>
     </div>
   );
