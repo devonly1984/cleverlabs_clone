@@ -39,7 +39,7 @@ import {
   VOICE_CATEGORY_LABELS,
 } from "../constants/voice-categories";
 import { createFormSchema } from "@/lib/schemas/createVoiceSchema";
-import LanguageComobox from "./LanguageComobox";
+import LanguageComobox from "./LanguageCombobox";
 import FileDropzone from "./FileDropzone";
 import VoiceRecorder from "../VoiceRecorder";
 interface VoiceCreateFormProps {
